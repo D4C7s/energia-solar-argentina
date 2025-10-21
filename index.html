@@ -3,175 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Explorador Solar Argentina ☀️</title>
+  <title>Energías Renovables en Argentina</title>
   <style>
+    /* -------- ESTILO GENERAL -------- */
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f3f8f2;
-      color: #222;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: #f4f7fa;
+      color: #333;
     }
 
-    header {
-      background: #ffd65a;
-      padding: 1rem;
+    h1, h2 {
+      margin: 0;
+    }
+
+    /* -------- PANTALLA 1 (Inicio) -------- */
+    .pantalla1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #a2d9ce, #1abc9c);
       text-align: center;
     }
 
-    section {
-      margin: 2rem;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    .pantalla1 h1 {
+      font-size: 2.5em;
+      color: #fff;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
     }
 
-    label, select, button {
-      display: block;
-      margin-top: 1rem;
+    .botones-inicio {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    button {
-      background-color: #ffb347;
+    .boton {
+      background-color: #fff;
+      color: #1abc9c;
+      padding: 15px 25px;
+      border-radius: 10px;
       border: none;
-      padding: 0.5rem 1rem;
       cursor: pointer;
-      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
     }
 
-    .info-box {
-      margin-top: 1.5rem;
-      padding: 1rem;
-      background: #e8f5e9;
-      border-radius: 8px;
+    .boton:hover {
+      background-color: #16a085;
+      color: #fff;
+      transform: scale(1.05);
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #fff8e1;
-      font-size: 0.9em;
+    /* -------- PANTALLA 2 (Dashboard principal) -------- */
+    .pantalla2 {
+      display: none; /* oculta al inicio */
+      height: 100vh;
+      display: flex;
+    }
+
+    /* Barra lateral izquierda */
+    .sidebar {
+      width: 80px;
+      background-color: #1abc9c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      gap: 20px;
+    }
+
+    .icono {
+      width: 40px;
+      height: 40px;
+      background-color: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .icono:hover {
+      background-color: #16a085;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    /* Contenido principal */
+    .contenido {
+      flex: 1;
+      padding: 40px;
+      background-color: #ecf0f1;
+    }
+
+    .contenido h2 {
+      color: #16a085;
+      margin-bottom: 20px;
+    }
+
+    /* Ocultar y mostrar pantallas */
+    .oculto {
+      display: none;
+    }
+    .visible {
+      display: flex;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Explorador de Energías Solares en Argentina 🇦🇷</h1>
-    <p>Aplicación educativa sobre tecnologías solares termoeléctricas (CSP) y fotovoltaicas (PV).</p>
-  </header>
 
-  <main>
+  <!-- PANTALLA 1 -->
+  <section id="pantalla1" class="pantalla1 visible">
+    <h1>Energías Renovables en Argentina</h1>
+    <div class="botones-inicio">
+      <button class="boton" onclick="mostrarPantalla2()">Energía Solar</button>
+      <button class="boton" onclick="mostrarPantalla2()">Energía Eólica</button>
+      <button class="boton" onclick="mostrarPantalla2()">Consumo Hogar</button>
+      <button class="boton" onclick="mostrarPantalla2()">Mapa Interactivo</button>
+    </div>
+  </section>
 
-    <!-- EXPLORADOR CSP -->
-    <section id="csp-section">
-      <h2>Tecnologías Solares Termoeléctricas (CSP)</h2>
+  <!-- PANTALLA 2 -->
+  <section id="pantalla2" class="pantalla2 oculto">
+    <!-- Barra lateral -->
+    <div class="sidebar">
+      <div class="icono">S</div>
+      <div class="icono">E</div>
+      <div class="icono">C</div>
+      <div class="icono">M</div>
+    </div>
 
-      <label for="tipoCSP">Selecciona una tecnología:</label>
-      <select id="tipoCSP">
-        <option value="">-- Elegir --</option>
-        <option value="ccp">Cilindro-Parabólica (CCP)</option>
-        <option value="torre">Receptor Central (Torre)</option>
-        <option value="disco">Disco Parabólico (Stirling)</option>
-      </select>
-
-      <div id="infoCSP" class="info-box"></div>
-    </section>
-
-    <hr>
-
-    <!-- SIMULADOR PV -->
-    <section id="pv-section">
-      <h2>Simulador de Instalación Solar Fotovoltaica (PV)</h2>
-
-      <label for="region">Selecciona una región:</label>
-      <select id="region">
-        <option value="sanjuan">San Juan</option>
-        <option value="catamarca">Catamarca</option>
-        <option value="jujuy">Jujuy</option>
-        <option value="buenosaires">Buenos Aires</option>
-      </select>
-
-      <label for="tracking">¿Utiliza seguimiento solar?</label>
-      <select id="tracking">
-        <option value="si">Sí</option>
-        <option value="no">No</option>
-      </select>
-
-      <button id="simular">Simular Generación</button>
-
-      <div id="resultadoPV" class="info-box"></div>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>Desarrollado por Joel | Proyecto Energías Alternativas - Argentina 🇦🇷</p>
-  </footer>
+    <!-- Contenido principal -->
+    <div class="contenido">
+      <h2>Título 1</h2>
+      <p>Texto 1 — Aquí irá el contenido de la sección seleccionada.</p>
+    </div>
+  </section>
 
   <script>
-    // --- EXPLORADOR CSP ---
-    document.getElementById("tipoCSP").addEventListener("change", function() {
-      const tipo = this.value;
-      const infoBox = document.getElementById("infoCSP");
-
-      let contenido = "";
-
-      if (tipo === "ccp") {
-        contenido = `
-          <h3>Cilindro-Parabólica (CCP)</h3>
-          <p>Opera a temperaturas medias (150–400°C). Utiliza colectores curvos que concentran la radiación solar en un tubo receptor, donde un fluido térmico se calienta y alimenta una turbina.</p>
-          <p><strong>Ventaja:</strong> Tecnología madura y eficiente.</p>
-          <p><strong>Permite almacenamiento térmico:</strong> Sí, mediante sales fundidas.</p>
-        `;
-      } else if (tipo === "torre") {
-        contenido = `
-          <h3>Receptor Central (Torre Solar)</h3>
-          <p>Opera a altas temperaturas (400–1000°C). Los heliostatos reflejan la radiación hacia un receptor en la parte superior de una torre.</p>
-          <p><strong>Ventaja:</strong> Alta eficiencia térmica y posibilidad de gran almacenamiento.</p>
-          <p><strong>Uso en Argentina:</strong> Potencial alto en zonas áridas del NOA.</p>
-        `;
-      } else if (tipo === "disco") {
-        contenido = `
-          <h3>Disco Parabólico (Stirling)</h3>
-          <p>Opera a altas temperaturas (hasta 800°C). Usa un motor Stirling que convierte directamente el calor solar en electricidad.</p>
-          <p><strong>Ventaja:</strong> Muy eficiente para potencias pequeñas.</p>
-          <p><strong>Almacenamiento térmico:</strong> No aplicable (sistema directo).</p>
-        `;
-      } else {
-        contenido = "";
-      }
-
-      infoBox.innerHTML = contenido;
-    });
-
-    // --- SIMULADOR PV ---
-    document.getElementById("simular").addEventListener("click", function() {
-      const region = document.getElementById("region").value;
-      const tracking = document.getElementById("tracking").value;
-      const resultadoBox = document.getElementById("resultadoPV");
-
-      const radiacion = {
-        sanjuan: 6.5,
-        catamarca: 6.3,
-        jujuy: 6.0,
-        buenosaires: 4.5
-      };
-
-      const base = radiacion[region];
-      const factorTracking = tracking === "si" ? 1.2 : 1.0;
-
-      const energia = (base * factorTracking * 30).toFixed(1); // kWh/mes estimado por m²
-
-      resultadoBox.innerHTML = `
-        <h3>Resultados de simulación</h3>
-        <p><strong>Ubicación:</strong> ${region.toUpperCase()}</p>
-        <p><strong>Radiación promedio:</strong> ${base} kWh/m²/día</p>
-        <p><strong>Seguimiento solar:</strong> ${tracking === "si" ? "Activo" : "Fijo"}</p>
-        <p><strong>Energía estimada:</strong> ${energia} kWh/m²/mes</p>
-        <p>La energía generada podría alimentar entre 1 y 2 hogares pequeños si se instala un sistema de 3–5 kWp.</p>
-      `;
-    });
+    // Función para cambiar de pantalla
+    function mostrarPantalla2() {
+      document.getElementById("pantalla1").classList.add("oculto");
+      document.getElementById("pantalla2").classList.remove("oculto");
+    }
   </script>
+
 </body>
 </html>
